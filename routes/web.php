@@ -5,6 +5,10 @@ use App\Http\Controllers\BookController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\MemberController;
 
+Route::get('/', function () {
+    return view('welcome');
+});
+
  // Route::get('/books', function () {
     // return 'Daftar Buku';
     // return view('books.index');
