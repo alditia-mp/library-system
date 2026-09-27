@@ -7,7 +7,7 @@
 
     <ul>
         @foreach($members as $member)
-            <li>{{ $member }}</li>
+            <li>{{ $member->name }}</li>
         @endforeach
     </ul>
 @endsection

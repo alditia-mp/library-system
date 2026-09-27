@@ -2,18 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+
 class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = [
-            'Pemrograman',
-            'Basis Data',
-            'Jaringan Komputer',
-            'Sistem Informasi',
-            'Algoritma'
-        ];
-
+        $categories = Category::all();
         return view('categories.index', compact('categories'));
     }
 }

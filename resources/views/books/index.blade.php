@@ -8,13 +8,15 @@
 
     <ul>
         @foreach($books as $book)
-            <li>{{ $book['title'] }} - {{ $book['author'] }} ({{ $book['year'] }})</li>
+            <li>
+                ID: {{ $book->id }} -
+                {{ $book->title }} - {{ $book->author }} ({{ $book->year }})
+                @if($book->stock > 0)
+                    <span>- Tersedia ({{ $book->stock }})</span>
+                @else
+                    <span>- Habis</span>
+                @endif
+            </li>
         @endforeach
     </ul>
-
-    @if($stock > 0)
-        <p>Buku tersedia.</p>
-    @else
-        <p>Buku sedang habis.</p>
-    @endif
 @endsection
