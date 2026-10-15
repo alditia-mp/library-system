@@ -9,21 +9,53 @@
         @csrf
         @method('PUT')
 
-        <p>Judul: <input type="text" name="title" value="{{ $book->title }}" required></p>
-        <p>Penulis: <input type="text" name="author" value="{{ $book->author }}" required></p>
-        <p>Tahun: <input type="number" name="year" value="{{ $book->year }}" required></p>
-        <p>Stok: <input type="number" name="stock" value="{{ $book->stock }}" required></p>
+        <div>
+            <label>Judul Buku</label>
+            <input type="text" name="title" value="{{ old('title', $book->title) }}">
+            @error('title')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
 
-        <p>
-            Kategori:
-            <select name="category_id" required>
+        <div>
+            <label>Penulis</label>
+            <input type="text" name="author" value="{{ old('author', $book->author) }}">
+            @error('author')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label>Tahun Terbit</label>
+            <input type="number" name="year" value="{{ old('year', $book->year) }}">
+            @error('year')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label>Stok</label>
+            <input type="number" name="stock" value="{{ old('stock', $book->stock) }}">
+            @error('stock')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label>Kategori</label>
+            <select name="category_id">
+                <option value="">-- Pilih Kategori --</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}" @if($category->id == $book->category_id) selected @endif>
+                    <option value="{{ $category->id }}"
+                        {{ old('category_id', $book->category_id) == $category->id ? 'selected' : '' }}>
                         {{ $category->name }}
                     </option>
                 @endforeach
             </select>
-        </p>
+            @error('category_id')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
 
         <button type="submit">Update</button>
     </form>

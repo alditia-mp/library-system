@@ -8,19 +8,52 @@
     <form action="{{ route('books.store') }}" method="POST">
         @csrf
 
-        <p>Judul: <input type="text" name="title" required></p>
-        <p>Penulis: <input type="text" name="author" required></p>
-        <p>Tahun: <input type="number" name="year" required></p>
-        <p>Stok: <input type="number" name="stock" required></p>
+        <div>
+            <label>Judul Buku</label>
+            <input type="text" name="title" value="{{ old('title') }}">
+            @error('title')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
 
-        <p>
-            Kategori:
-            <select name="category_id" required>
+        <div>
+            <label>Penulis</label>
+            <input type="text" name="author" value="{{ old('author') }}">
+            @error('author')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label>Tahun Terbit</label>
+            <input type="number" name="year" value="{{ old('year') }}">
+            @error('year')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label>Stok</label>
+            <input type="number" name="stock" value="{{ old('stock') }}">
+            @error('stock')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
+
+        <div>
+            <label>Kategori</label>
+            <select name="category_id">
+                <option value="">-- Pilih Kategori --</option>
                 @foreach($categories as $category)
-                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected @endif>
+                        {{ $category->name }}
+                    </option>
                 @endforeach
             </select>
-        </p>
+            @error('category_id')
+                <p style="color:red">{{ $message }}</p>
+            @enderror
+        </div>
 
         <button type="submit">Simpan</button>
     </form>
