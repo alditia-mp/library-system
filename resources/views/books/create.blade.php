@@ -5,6 +5,11 @@
 @section('content')
     <h2>Tambah Buku</h2>
 
+    <style>
+        form div { margin-bottom: 10px; }
+        form label { display: inline-block; width: 120px; }
+    </style>
+
     <form action="{{ route('books.store') }}" method="POST">
         @csrf
 
@@ -41,11 +46,11 @@
         </div>
 
         <div>
-            <label>Kategori</label>
-            <select name="category_id">
-                <option value="">-- Pilih Kategori --</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}" @if(old('category_id') == $category->id) selected @endif>
+            <label for="category_id">Kategori</label>
+            <select name="category_id" id="category_id">
+                <option value="">Pilih kategori</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id') == $category->id)>
                         {{ $category->name }}
                     </option>
                 @endforeach

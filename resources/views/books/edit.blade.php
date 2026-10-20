@@ -5,6 +5,11 @@
 @section('content')
     <h2>Edit Buku</h2>
 
+    <style>
+        form div { margin-bottom: 10px; }
+        form label { display: inline-block; width: 120px; }
+    </style>
+
     <form action="{{ route('books.update', $book) }}" method="POST">
         @csrf
         @method('PUT')
@@ -42,12 +47,11 @@
         </div>
 
         <div>
-            <label>Kategori</label>
-            <select name="category_id">
-                <option value="">-- Pilih Kategori --</option>
-                @foreach($categories as $category)
-                    <option value="{{ $category->id }}"
-                        {{ old('category_id', $book->category_id) == $category->id ? 'selected' : '' }}>
+            <label for="category_id">Kategori</label>
+            <select name="category_id" id="category_id">
+                <option value="">Pilih kategori</option>
+                @foreach ($categories as $category)
+                    <option value="{{ $category->id }}" @selected(old('category_id', $book->category_id) == $category->id)>
                         {{ $category->name }}
                     </option>
                 @endforeach

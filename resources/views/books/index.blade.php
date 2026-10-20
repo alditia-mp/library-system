@@ -12,25 +12,40 @@
 
     <p><a href="{{ route('books.create') }}">+ Tambah Buku</a></p>
 
-    <ul>
-        @foreach($books as $book)
-            <li>
-                ID: {{ $book->id }} -
-                {{ $book->title }} - {{ $book->author }} ({{ $book->year }})
-                @if($book->stock > 0)
-                    <span>- Stok Tersedia ({{ $book->stock }})</span>
-                @else
-                    <span>- Stok Habis</span>
-                @endif
+        <table border="1" cellpadding="6" cellspacing="0">
+            <tr>
+                <th>ID</th>
+                <th>Judul</th>
+                <th>Penulis</th>
+                <th>Tahun</th>
+                <th>Kategori</th>
+                <th>Stok</th>
+                <th>Aksi</th>
+            </tr>
+            @foreach($books as $book)
+                <tr>
+                    <td>{{ $book->id }}</td>
+                    <td>{{ $book->title }}</td>
+                    <td>{{ $book->author }}</td>
+                    <td>{{ $book->year }}</td>
+                    <td>{{ $book->category?->name ?? 'Belum ada kategori' }}</td>
+                    <td>
+                        @if($book->stock > 0)
+                            Tersedia ({{ $book->stock }})
+                        @else
+                            Habis
+                        @endif
+                    </td>
+                    <td>
+                        <button type="button" onclick="window.location='{{ route('books.edit', $book) }}'">Edit</button>
 
-                <a href="{{ route('books.edit', $book) }}">Edit</a>
-
-                <form action="{{ route('books.destroy', $book) }}" method="POST" style="display:inline">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" onclick="return confirm('Yakin hapus buku ini?')">Hapus</button>
-                </form>
-            </li>
-        @endforeach
-    </ul>
+                        <form action="{{ route('books.destroy', $book) }}" method="POST" style="display:inline">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" onclick="return confirm('Yakin hapus buku ini?')">Hapus</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
 @endsection

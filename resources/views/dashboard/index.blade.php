@@ -6,9 +6,22 @@
     <h2>{{ $title }}</h2>
     <p>{{ $description }}</p>
 
-    <ul>
-        <li>Jumlah Buku: {{ $totalBooks }}</li>
-        <li>Jumlah Member: {{ $totalMembers }}</li>
-        <li>Jumlah Kategori: {{ $totalCategories }}</li>
-    </ul>
+        <table border="1" cellpadding="6" cellspacing="0">
+            <tr>
+                <th>Data</th>
+                <th>Jumlah</th>
+            </tr>
+            <tr>
+                <td>Buku</td>
+                <td>{{ $totalBooks }}</td>
+            </tr>
+            <tr>
+                <td>Member</td>
+                <td>{{ $totalMembers }}</td>
+            </tr>
+            <tr>
+                <td>Kategori</td>
+                <td>{{ $totalCategories }}</td>
+            </tr>
+        </table>
 @endsection
