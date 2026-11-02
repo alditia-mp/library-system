@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Book;
 use App\Models\Category;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Gate;
 
 class BookController extends Controller
 {
@@ -72,8 +73,13 @@ class BookController extends Controller
 
     public function destroy(Book $book)
     {
+        Gate::authorize('delete', $book);
+
         $book->delete();
-        return redirect()->route('books.index');
+
+        return redirect()
+            ->route('books.index')
+            ->with('success', 'Buku berhasil dihapus.');
     }
 
     public function show($id)

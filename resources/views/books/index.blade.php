@@ -39,11 +39,17 @@
                     <td>
                         <button type="button" onclick="window.location='{{ route('books.edit', $book) }}'">Edit</button>
 
-                        <form action="{{ route('books.destroy', $book) }}" method="POST" style="display:inline">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" onclick="return confirm('Yakin hapus buku ini?')">Hapus</button>
-                        </form>
+                        @can('delete', $book)
+                            <form action="{{ route('books.destroy', $book->id) }}"
+                                method="POST"
+                                onsubmit="return confirm('Yakin ingin menghapus buku ini?')">
+
+                                @csrf
+                                @method('DELETE')
+
+                                <button type="submit">Delete</button>
+                            </form>
+                        @endcan
                     </td>
                 </tr>
             @endforeach
